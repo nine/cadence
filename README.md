@@ -16,5 +16,5 @@ apt install omxplayer
 
 1. Install omxplayer dbus control script 
 ```
-omxplayer_dbuscontrol.sh
+cp omxplayer_dbuscontrol.sh /usr/local/bin/
 ```
