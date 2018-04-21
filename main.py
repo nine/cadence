@@ -1,7 +1,6 @@
 
 import time
 from threading import Timer, Thread, Event
-from statistics import mean
 import gpiozero
 from signal import pause
 import os
@@ -9,7 +8,7 @@ import os
 
 # globals
 video_file = r'/home/pi/Videos/video.avi'
-ctr = 10
+timestamp = time.time() 
 
 
 class PulseInput(Thread):
@@ -19,18 +18,14 @@ class PulseInput(Thread):
     self.button = gpiozero.Button(4)
 
   def update(self):
-    global ctr
-    if ctr < 10: 
-      ctr = ctr + 2
+    global timestamp 
+    timestamp = time.time() 
 
   def run(self):
-    global ctr
     self.update()
     self.button.when_pressed = lambda : self.update()
     while not self.stopped.wait(1):
-      while ctr > 0:
-        ctr = ctr-1
-        time.sleep(0.20)
+      time.sleep(1)
     
 
 
@@ -46,8 +41,8 @@ is_playing = True
 
 # check activity
 while True:
-  time.sleep(0.5)
-  if ctr == 0:
+  time.sleep(0.1)
+  if (time.time() - timestamp) > 1.0:
     if is_playing:
       os.system('omxplayer_dbuscontrol.sh pause')
       is_playing = False 
