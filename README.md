@@ -9,13 +9,12 @@
 
 1. Install deb packages  
 ```
-aptitude install python3-pip
-aptitude install python3-rpi.gpio
-aptitude install python3-gpiozero
+apt install python3-rpi.gpio
+apt install python3-gpiozero
+apt install omxplayer
 ```
 
-1. Install python PIP package
+1. Install omxplayer dbus control script 
 ```
-pip3 install python-vlc
+omxplayer_dbuscontrol.sh
 ```
-
